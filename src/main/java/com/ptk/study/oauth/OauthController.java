@@ -2,7 +2,7 @@ package com.ptk.study.oauth;
 
 import com.ptk.study.oauth.dto.KakaoTokenDTO;
 import com.ptk.study.oauth.dto.OauthTokenRequestDTO;
-import com.ptk.study.oauth.service.OauthTokenService;
+import com.ptk.study.oauth.service.OauthService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,10 +15,10 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/oauth")
 public class OauthController {
 
-    public OauthTokenService oauthTokenService;
+    public OauthService oauthService;
 
-    public OauthController(OauthTokenService oauthTokenService) {
-        this.oauthTokenService = oauthTokenService;
+    public OauthController(OauthService oauthService) {
+        this.oauthService = oauthService;
     }
 
     @GetMapping
@@ -27,10 +27,12 @@ public class OauthController {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", "cd472dc23f994b84c4a4c252dd372b5b");
-        body.add("redirect_uri", "http://localhost:8080/oauth");
+        body.add("redirect_uri", "http://221.162.209.84:8080/oauth");
         body.add("code", code);
+        String token = oauthService.requestToken(body);
+        String userProfile = oauthService.requestUserProfile(token);
 
-        return oauthTokenService.requestToken(body);
+        return userProfile;
 
     }
 

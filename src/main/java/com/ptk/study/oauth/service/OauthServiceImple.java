@@ -9,10 +9,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class OauthTokenServiceImple implements OauthTokenService{
+public class OauthServiceImple implements OauthService{
     public String requestToken(MultiValueMap<String, String> body) {
-
-
 
         // Header set
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -23,6 +21,18 @@ public class OauthTokenServiceImple implements OauthTokenService{
         String url = "https://kauth.kakao.com/oauth/token";
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<KakaoTokenDTO> response = restTemplate.postForEntity(url, requestMessage, KakaoTokenDTO.class);
+
         return response.getBody().getAccess_token();
+    }
+
+    public String requestUserProfile(String token) {
+        String uri = "https://kapi.kakao.com/v2/user/me";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Type", "application/x-www-form-urlencoded");
+        httpHeaders.add("Authorization", "Bearer " + token);
+        HttpEntity<?> requestBody = new HttpEntity<>(httpHeaders);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> response = restTemplate.postForEntity(uri, requestBody, String.class);
+        return response.getBody().toString();
     }
 }

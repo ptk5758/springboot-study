@@ -1,5 +1,6 @@
 package com.ptk.study;
 
+import com.ptk.study.dto.KakaoTokenDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,9 +40,11 @@ public class OauthController {
         HttpEntity<?> requestMessage = new HttpEntity<>(body, httpHeaders);
 
         // Request
-        HttpEntity<String> response = restTemplate.postForEntity(url, requestMessage, String.class);
+        HttpEntity<KakaoTokenDTO> response = restTemplate.postForEntity(url, requestMessage, KakaoTokenDTO.class);
 
-        return response.getBody().toString();
+        KakaoTokenDTO kakaoTokenDTO = response.getBody();
+
+        return kakaoTokenDTO.getAccess_token();
 
     }
 

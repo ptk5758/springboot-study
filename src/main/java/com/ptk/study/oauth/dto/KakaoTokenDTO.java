@@ -1,4 +1,4 @@
-package com.ptk.study.dto;
+package com.ptk.study.oauth.dto;
 
 public class KakaoTokenDTO {
     String access_token;

@@ -1,4 +1,4 @@
-package com.ptk.study;
+package com.ptk.study.main;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

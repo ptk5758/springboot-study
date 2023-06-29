@@ -1,20 +1,13 @@
-package com.ptk.study;
+package com.ptk.study.oauth;
 
-import com.ptk.study.dto.KakaoTokenDTO;
+import com.ptk.study.oauth.dto.KakaoTokenDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/oauth")
